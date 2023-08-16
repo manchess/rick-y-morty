@@ -10,15 +10,7 @@ import org.springframework.web.client.RestTemplate;
 public class PruebaApplication {
 
 	public static void main(String[] args) {
-		final String CHARACTERS_URL = "https://rickandmortyapi.com/api/character";
-
-		RestTemplate restTemplate = new RestTemplate();
-
-		ResponseEntity<RMApi> response = restTemplate.getForEntity(CHARACTERS_URL, RMApi.class);
-
-		System.out.println(response.getBody().getInfo());
-
-//		SpringApplication.run(PruebaApplication.class, args);
+		SpringApplication.run(PruebaApplication.class, args);
 	}
 
 }

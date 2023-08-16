@@ -1,6 +1,7 @@
 package com.practica.rick_morty.prueba.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +16,11 @@ public class CharacterController {
 
     @GetMapping("/characters")
     public void getCharacters() {
+
+    }
+
+    @GetMapping("/characters/{id}")
+    public void getCharacterById(@PathVariable Integer id) {
 
     }
 }
