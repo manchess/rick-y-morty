@@ -7,6 +7,9 @@ import com.practica.rick_morty.prueba.exceptions.CharacterException;
 import com.practica.rick_morty.prueba.models.Characters;
 import com.practica.rick_morty.prueba.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -76,8 +79,11 @@ public class CharacterServiceImpl implements  CharacterService {
     }
 
     @Override
-    public List<CharacterInfo> getCharacters() {
-        List<Characters> entities = repository.findAll();
+    public List<CharacterInfo> getCharacters(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Characters> pageCharacters = repository.findAll(pageable);
+
+        List<Characters> entities = pageCharacters.getContent();
 
         return entities.stream().map(this::toBean).collect(Collectors.toList());
     }

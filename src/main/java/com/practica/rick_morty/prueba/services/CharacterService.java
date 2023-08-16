@@ -14,5 +14,5 @@ public interface CharacterService {
 
     CharacterInfo findCharacterById(Integer id);
 
-    List<CharacterInfo> getCharacters();
+    List<CharacterInfo> getCharacters(int page, int size);
 }

@@ -31,8 +31,11 @@ public class CharacterController {
 
     // Local endpoints to consume the API
     @GetMapping("/character")
-    public List<CharacterInfo> getCharacters() {
-        return service.getCharacters();
+    public List<CharacterInfo> getCharacters(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "3") int size
+    ) {
+        return service.getCharacters(page, size);
     }
 
     @GetMapping("/character/{id}")
