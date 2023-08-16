@@ -9,7 +9,6 @@ import com.practica.rick_morty.prueba.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -32,24 +31,18 @@ public class CharacterServiceImpl implements  CharacterService {
     public RMApi getCharactersAPI(Integer page) {
         final String CHARACTERS_URL = "https://rickandmortyapi.com/api/character?page=" + page;
 
-        try {
-            ResponseEntity<RMApi> response = restTemplate.getForEntity(CHARACTERS_URL, RMApi.class);
-            return response.getBody();
-        } catch (RestClientException e) {
-            throw e;
-        }
+        ResponseEntity<RMApi> response = restTemplate.getForEntity(CHARACTERS_URL, RMApi.class);
+
+        return response.getBody();
     }
 
     @Override
     public CharacterInfo getCharacterAPIById(Integer id) {
         final String CHARACTER_URL = "https://rickandmortyapi.com/api/character/" + id;
 
-        try {
-            ResponseEntity<CharacterInfo> response = restTemplate.getForEntity(CHARACTER_URL, CharacterInfo.class);
-            return response.getBody();
-        } catch (RestClientException e) {
-            throw e;
-        }
+        ResponseEntity<CharacterInfo> response = restTemplate.getForEntity(CHARACTER_URL, CharacterInfo.class);
+
+        return response.getBody();
     }
 
     @Override
@@ -86,7 +79,7 @@ public class CharacterServiceImpl implements  CharacterService {
     public List<CharacterInfo> getCharacters() {
         List<Characters> entities = repository.findAll();
 
-        return entities.stream().map(entity -> toBean(entity)).collect(Collectors.toList());
+        return entities.stream().map(this::toBean).collect(Collectors.toList());
     }
 
     private Characters toEntity(CharacterInfo character) {

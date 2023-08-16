@@ -16,6 +16,7 @@ public class CharacterController {
     @Autowired
     private CharacterService service;
 
+    // External endpoints to consume the R&M API
     @GetMapping("ext/character")
     public RMApi getApiCharacters(@RequestParam(value = "page", defaultValue = "1") Integer page) {
         return service.getCharactersAPI(page);
@@ -27,6 +28,8 @@ public class CharacterController {
     }
 
 
+
+    // Local endpoints to consume the API
     @GetMapping("/character")
     public List<CharacterInfo> getCharacters() {
         return service.getCharacters();

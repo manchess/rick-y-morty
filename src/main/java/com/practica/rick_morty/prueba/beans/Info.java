@@ -1,7 +1,6 @@
 package com.practica.rick_morty.prueba.beans;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Data
 public class Info {
