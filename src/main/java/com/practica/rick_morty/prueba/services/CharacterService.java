@@ -9,4 +9,6 @@ public interface CharacterService {
     RMApi getCharactersAPI(Integer page);
 
     CharacterInfo getCharacterAPIById(Integer id);
+
+    CharacterInfo saveCharacterById(Integer id);
 }

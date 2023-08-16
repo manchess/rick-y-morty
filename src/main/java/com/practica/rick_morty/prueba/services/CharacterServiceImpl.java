@@ -43,4 +43,9 @@ public class CharacterServiceImpl implements  CharacterService {
             throw e;
         }
     }
+
+    @Override
+    public CharacterInfo saveCharacterById(Integer id) {
+        return null;
+    }
 }

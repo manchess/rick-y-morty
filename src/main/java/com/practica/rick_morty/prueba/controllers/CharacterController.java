@@ -34,4 +34,9 @@ public class CharacterController {
     public void getCharacterById(@PathVariable Integer id) {
 
     }
+
+    @PostMapping("/character/{id}")
+    public void saveCharacter(@PathVariable Integer id) {
+        service.saveCharacterById(id);
+    }
 }
