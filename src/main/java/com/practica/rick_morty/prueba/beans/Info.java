@@ -1,10 +1,8 @@
 package com.practica.rick_morty.prueba.beans;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class Info {
     private int count;
     private int pages;
