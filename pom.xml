@@ -12,7 +12,7 @@
 
 	<groupId>com.practica.rick_morty</groupId>
 	<artifactId>prueba</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>prueba</name>
 	<description>Consumiendo API de Rick y Morty</description>
 

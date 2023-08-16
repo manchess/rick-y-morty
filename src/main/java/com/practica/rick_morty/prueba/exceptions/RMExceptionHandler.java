@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.RestClientException;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,17 @@ public class RMExceptionHandler {
 
         ExceptionRMApi response = new ExceptionRMApi();
         response.setErrorDescription(ex.getMessage().replaceAll("\"", ""));
+
+        return response;
+    }
+
+    @ExceptionHandler(CharacterExistException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ExceptionRMApi handleCharacterExistExceptionException(CharacterExistException ex) {
+
+        ExceptionRMApi response = new ExceptionRMApi();
+        response.setErrorDescription(ex.getMessage());
 
         return response;
     }
