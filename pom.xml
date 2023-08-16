@@ -14,10 +14,10 @@
 	<artifactId>prueba</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>prueba</name>
-	<description>Consumiendo API de &quot;Rick y Morty&quot;</description>
+	<description>Consumiendo API de Rick y Morty</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 
 
