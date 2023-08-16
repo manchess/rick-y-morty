@@ -1,19 +1,20 @@
 package com.practica.rick_morty.prueba.services;
 
 import com.practica.rick_morty.prueba.beans.CharacterInfo;
+import com.practica.rick_morty.prueba.beans.Origin;
 import com.practica.rick_morty.prueba.beans.RMApi;
-import com.practica.rick_morty.prueba.exceptions.CharacterExistException;
+import com.practica.rick_morty.prueba.exceptions.CharacterException;
 import com.practica.rick_morty.prueba.models.Characters;
 import com.practica.rick_morty.prueba.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CharacterServiceImpl implements  CharacterService {
@@ -58,16 +59,34 @@ public class CharacterServiceImpl implements  CharacterService {
         final String EXCEPTION_MSG = "The character you are trying to create already exists";
 
         // If it exists, we notify that it cannot be created
-        if (entity.isPresent())
-        {
-            throw new CharacterExistException(EXCEPTION_MSG);
+        if (entity.isPresent()) {
+            throw new CharacterException(EXCEPTION_MSG);
         }
 
         // Look for the character of the API that corresponds to the id and save it
         character = getCharacterAPIById(id);
         repository.save(toEntity(character));
-        
+
         return character;
+    }
+
+    @Override
+    public CharacterInfo findCharacterById(Integer id) {
+        Optional<Characters> entity = repository.findById(id);
+        final String EXCEPTION_MSG = "Character not found";
+
+        if (entity.isPresent()) {
+            return toBean(entity.get());
+        }
+
+        throw new CharacterException(EXCEPTION_MSG);
+    }
+
+    @Override
+    public List<CharacterInfo> getCharacters() {
+        List<Characters> entities = repository.findAll();
+
+        return entities.stream().map(entity -> toBean(entity)).collect(Collectors.toList());
     }
 
     private Characters toEntity(CharacterInfo character) {
@@ -82,5 +101,21 @@ public class CharacterServiceImpl implements  CharacterService {
         entity.setImage(character.getImage());
 
         return entity;
+    }
+
+    private CharacterInfo toBean(Characters entity) {
+        CharacterInfo character = new CharacterInfo();
+        Origin origin = new Origin();
+        origin.setName(entity.getName());
+
+        character.setId(entity.getId());
+        character.setName(entity.getName());
+        character.setStatus(entity.getStatus());
+        character.setSpecies(entity.getSpecies());
+        character.setGender(entity.getGender());
+        character.setOrigin(origin);
+        character.setImage(entity.getImage());
+
+        return character;
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/rm/")
 public class CharacterController {
@@ -14,26 +16,25 @@ public class CharacterController {
     @Autowired
     private CharacterService service;
 
-    @GetMapping("character")
+    @GetMapping("ext/character")
     public RMApi getApiCharacters(@RequestParam(value = "page", defaultValue = "1") Integer page) {
         return service.getCharactersAPI(page);
     }
 
-    @GetMapping("character/{id}")
+    @GetMapping("ext/character/{id}")
     public CharacterInfo getApiCharacterById(@PathVariable Integer id) {
         return service.getCharacterAPIById(id);
     }
 
 
-    @GetMapping("/characters")
-    public void getCharacters() {
-
-
+    @GetMapping("/character")
+    public List<CharacterInfo> getCharacters() {
+        return service.getCharacters();
     }
 
-    @GetMapping("/characters/{id}")
-    public void getCharacterById(@PathVariable Integer id) {
-
+    @GetMapping("/character/{id}")
+    public ResponseEntity<CharacterInfo> getCharacterById(@PathVariable Integer id) {
+        return ResponseEntity.ok(service.findCharacterById(id));
     }
 
     @PostMapping("/character/{id}")

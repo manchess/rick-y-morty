@@ -32,10 +32,10 @@ public class RMExceptionHandler {
         return response;
     }
 
-    @ExceptionHandler(CharacterExistException.class)
+    @ExceptionHandler(CharacterException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ExceptionRMApi handleCharacterExistExceptionException(CharacterExistException ex) {
+    public ExceptionRMApi handleCharacterExceptionException(CharacterException ex) {
 
         ExceptionRMApi response = new ExceptionRMApi();
         response.setErrorDescription(ex.getMessage());

@@ -3,6 +3,7 @@ package com.practica.rick_morty.prueba.services;
 import com.practica.rick_morty.prueba.beans.CharacterInfo;
 import com.practica.rick_morty.prueba.beans.RMApi;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CharacterService {
@@ -11,4 +12,8 @@ public interface CharacterService {
     CharacterInfo getCharacterAPIById(Integer id);
 
     CharacterInfo saveCharacterById(Integer id);
+
+    CharacterInfo findCharacterById(Integer id);
+
+    List<CharacterInfo> getCharacters();
 }
