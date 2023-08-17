@@ -47,4 +47,14 @@ public class CharacterController {
     public ResponseEntity<CharacterInfo> saveCharacter(@PathVariable Integer id) {
         return ResponseEntity.ok(service.saveCharacterById(id));
     }
+
+    @PutMapping("/character")
+    public ResponseEntity<String> updateCharacter(@RequestBody CharacterInfo characterToUpdate) {
+        return ResponseEntity.ok(service.updateCharacterById(characterToUpdate));
+    }
+
+    @DeleteMapping("/character/{id}")
+    public ResponseEntity<String> deleteCharacter(@PathVariable int id) {
+        return ResponseEntity.ok(service.deleteCharacterById(id));
+    }
 }

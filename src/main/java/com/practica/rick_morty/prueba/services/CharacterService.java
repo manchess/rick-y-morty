@@ -15,4 +15,8 @@ public interface CharacterService {
     CharacterInfo findCharacterById(Integer id);
 
     List<CharacterInfo> getCharacters(int page, int size);
+
+    String updateCharacterById(CharacterInfo characterToUpdate);
+
+    String deleteCharacterById(int id);
 }

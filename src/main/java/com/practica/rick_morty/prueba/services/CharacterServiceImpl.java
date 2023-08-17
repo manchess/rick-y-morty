@@ -88,6 +88,30 @@ public class CharacterServiceImpl implements  CharacterService {
         return entities.stream().map(this::toBean).collect(Collectors.toList());
     }
 
+    @Override
+    public String updateCharacterById(CharacterInfo characterToUpdate) {
+        Characters characterFromDB = toEntity(findCharacterById(characterToUpdate.getId()));
+
+        characterFromDB.setName(characterToUpdate.getName());
+        characterFromDB.setSpecies(characterToUpdate.getSpecies());
+        characterFromDB.setGender(characterToUpdate.getGender());
+        characterFromDB.setOrigin(characterToUpdate.getOrigin().getName());
+        characterFromDB.setImage(characterToUpdate.getImage());
+
+        repository.save(characterFromDB);
+
+        return "OK";
+    }
+
+    @Override
+    public String deleteCharacterById(int id) {
+        Characters characterToDele = toEntity(findCharacterById(id));
+
+        repository.delete(characterToDele);
+
+        return "OK";
+    }
+
     private Characters toEntity(CharacterInfo character) {
         Characters entity = new Characters();
 
@@ -105,7 +129,7 @@ public class CharacterServiceImpl implements  CharacterService {
     private CharacterInfo toBean(Characters entity) {
         CharacterInfo character = new CharacterInfo();
         Origin origin = new Origin();
-        origin.setName(entity.getName());
+        origin.setName(entity.getOrigin());
 
         character.setId(entity.getId());
         character.setName(entity.getName());
