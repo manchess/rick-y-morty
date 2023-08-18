@@ -59,7 +59,7 @@ Esta documentación proporciona información sobre los endpoints disponibles en 
 ## Tabla de Contenido
 
 1. [Obtener personajes de la API de Rick y Morty](#1-obtener-personajes-de-la-api-externa)
-2. [Obtener UN personaje dela API de Rick y Morty](#2-obtener-un-personaje-de-la-api-externa-por-id)
+2. [Obtener UN personaje dela API de Rick y Morty](#2-obtener-un-personaje-de-la-api-de-rick-y-morty)
 3. [Obtener Personajes Locales](#3-obtener-personajes-locales)
 4. [Obtener un Personaje Local por ID](#4-obtener-un-personaje-local-por-id)
 5. [Guardar un Personaje Local](#5-guardar-un-personaje-local)
