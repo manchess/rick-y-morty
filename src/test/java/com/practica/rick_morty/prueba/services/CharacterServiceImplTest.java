@@ -84,9 +84,30 @@ class CharacterServiceImplTest {
 
     @Test
     void updateCharacterById() {
+        // Arrange
+        CharacterInfo characterInfo = Utils.createCharacterInfo();
+        characterInfo.setStatus("Dead");
+
+        doReturn(characterInfo).when(spyService).findCharacterById(anyInt());
+
+        // Act
+        String response = spyService.updateCharacterById(characterInfo);
+
+        // Asserts
+        assertTrue("OK".equalsIgnoreCase(response));
     }
 
     @Test
     void deleteCharacterById() {
+        // Arrange
+        CharacterInfo characterInfo = Utils.createCharacterInfo();
+
+        doReturn(characterInfo).when(spyService).findCharacterById(anyInt());
+
+        // Act
+        String response = spyService.deleteCharacterById(1);
+
+        // Asserts
+        assertTrue("OK".equalsIgnoreCase(response));
     }
 }
